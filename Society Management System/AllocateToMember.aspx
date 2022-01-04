@@ -5,6 +5,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+
+    <style type="text/css">
+        input[type=text], select{
+            width: 30%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -41,7 +66,7 @@
             <br />
             <br />
 &nbsp;House No :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:DropDownList ID="memberHouseNoDropDownList" runat="server" AutoPostBack="True" DataTextField="HouseNo" DataValueField="HouseNo">
+            <asp:DropDownList ID="memberHouseNoDropDownList" runat="server" AutoPostBack="True" DataTextField="HouseNo" DataValueField="HouseNo" OnSelectedIndexChanged="memberHouseNoDropDownList_SelectedIndexChanged">
             </asp:DropDownList>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Label ID="Label10" runat="server" Text="Label"></asp:Label>
@@ -63,7 +88,7 @@
             <br />
             <br />
             <br />
-            <asp:Button ID="addmemberBtn" runat="server" OnClick="addmemberBtn_Click" Text="ADD MEMBER" />
+            <asp:Button ID="addmemberBtn" runat="server" CssClass="select"  OnClick="addmemberBtn_Click" Text="ADD MEMBER" />
             <br />
             <br />
             <asp:Label ID="Label9" runat="server" Text="Label"></asp:Label>

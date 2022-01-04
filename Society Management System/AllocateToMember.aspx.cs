@@ -9,10 +9,10 @@ using System.Configuration;
 using System.IO;
 
 public partial class AllocateToMember : System.Web.UI.Page
-{
-    int[] n = new int[100];
+{ 
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         if (!IsPostBack)
         {
             Label9.Visible = false;
@@ -40,17 +40,13 @@ public partial class AllocateToMember : System.Web.UI.Page
 
     protected void addmemberBtn_Click(object sender, EventArgs e)
     {
-        
-
-
-
         string conn = "Data Source=SADDU-S;Initial Catalog=Project;Integrated Security=True";
         SqlConnection sqlcon = new SqlConnection(conn);
         FileUpload1.SaveAs(Server.MapPath("~/pic/") + Path.GetFileName(FileUpload1.FileName));
         String link = "pic/" + Path.GetFileName(FileUpload1.FileName);
 
         String query = "Insert into MemberTable(FName,LName,Email,Mobile,SName,HNo,Photo,UName,Pass)values ('" + TextBox1.Text + "','" + TextBox2.Text + "','" + TextBox3.Text + "','" + TextBox4.Text + "','"+memberSocietyNameDropDownList.SelectedItem.Text+"','"+memberHouseNoDropDownList.SelectedItem.Text+"','" + link + "','"+TextBox5.Text+"','"+TextBox6.Text+"')";
-
+        
         SqlCommand cmd = new SqlCommand(query, sqlcon);
         sqlcon.Open();
         cmd.ExecuteNonQuery();
@@ -67,7 +63,7 @@ public partial class AllocateToMember : System.Web.UI.Page
         {
             con.Open();
             string selected = memberSocietyNameDropDownList.SelectedItem.Text;
-            System.Diagnostics.Debug.WriteLine(selected);
+            
             SqlCommand cmd = new SqlCommand("Select * from HouseTable1 where SName='"+selected+ "'", con);
             SqlDataReader rdr = cmd.ExecuteReader();
             memberHouseNoDropDownList.DataTextField = "HouseNo";
@@ -78,5 +74,27 @@ public partial class AllocateToMember : System.Web.UI.Page
             memberHouseNoDropDownList.Items.Insert(0, "<-- Select -->");
             con.Close();
         }
+    }
+
+    protected void memberHouseNoDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+    {  
+        SqlConnection con = new SqlConnection("Data Source=SADDU-S;Initial Catalog=Project;Integrated Security=True");
+        con.Open();
+        String query = "select SName,HNo from MemberTable where SName='"+memberSocietyNameDropDownList.SelectedItem.Text+"' and HNo='"+memberHouseNoDropDownList.SelectedItem.Value+"' ";
+
+        SqlCommand cmd = new SqlCommand(query, con);
+        SqlDataReader rdr = cmd.ExecuteReader();
+        
+        if(rdr.HasRows)
+        {
+            //System.Diagnostics.Debug.WriteLine(rdr);
+            Label10.Visible = true;
+            Label10.Text = "Already Allocated";
+        }
+        else
+        {
+            Label10.Visible = false;
+        }
+        
     }
 }
