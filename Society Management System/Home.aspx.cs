@@ -17,4 +17,14 @@ public partial class Home : System.Web.UI.Page
         Response.Redirect("AdminLogin.aspx");
 
     }
+
+    protected void MemberBtn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MemberLogin.aspx");
+    }
+
+    protected void SocietyBtn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Visitor.aspx");
+    }
 }

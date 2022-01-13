@@ -16,4 +16,24 @@ public partial class Admin : System.Web.UI.Page
     {
         Response.Redirect("Society.aspx");
     }
+
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("AddHouse.aspx");
+    }
+
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("HouseReport.aspx");
+    }
+
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("AllocateToMember.aspx");
+    }
+
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MemberReport.aspx");
+    }
 }

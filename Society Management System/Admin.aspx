@@ -13,16 +13,16 @@
             <asp:Button ID="societyBtn" runat="server" OnClick="societyBtn_Click" Text="ADD SOCIETY" Width="273px" />
             <br />
             <br />
-            <asp:Button ID="Button2" runat="server" Text="ADD HOUSE" Width="277px" />
+            <asp:Button ID="Button2" runat="server" Text="ADD HOUSE" Width="277px" OnClick="Button2_Click" />
             <br />
             <br />
-            <asp:Button ID="Button3" runat="server" Text="HOUSE REPORT" Width="277px" />
+            <asp:Button ID="Button3" runat="server" Text="HOUSE REPORT" Width="277px" OnClick="Button3_Click" />
             <br />
             <br />
-            <asp:Button ID="Button4" runat="server" Text="ALLOCATE TO MEMBER" Width="279px" />
+            <asp:Button ID="Button4" runat="server" Text="ALLOCATE TO MEMBER" Width="279px" OnClick="Button4_Click" />
             <br />
             <br />
-            <asp:Button ID="Button5" runat="server" Text="MEMBER REPORT" Width="278px" />
+            <asp:Button ID="Button5" runat="server" Text="MEMBER REPORT" Width="278px" OnClick="Button5_Click" />
 
         </div>
     </form>

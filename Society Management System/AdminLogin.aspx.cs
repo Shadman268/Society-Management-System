@@ -32,7 +32,6 @@ public partial class AdminLogin : System.Web.UI.Page
             Label4.Visible = true;
             Label4.ForeColor = System.Drawing.Color.Red;
             Label4.Text = "Invalid User!!!";
-
         }
     }
 }
