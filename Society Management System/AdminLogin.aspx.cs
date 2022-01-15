@@ -10,9 +10,15 @@ public partial class AdminLogin : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Label4.Visible = false;
+        
+        if(!IsPostBack)
+        {
+            Label4.Visible = false;
+            
+        }
+        
     }
-
+    
 
     SqlConnection con = new SqlConnection("Data Source=SADDU-S;Initial Catalog=Project;Integrated Security=True");
     protected void adminloginBtn_Click(object sender, EventArgs e)
@@ -25,13 +31,25 @@ public partial class AdminLogin : System.Web.UI.Page
         con.Close();
         if (temp == 1)
         {
-            Response.Redirect("Admin.aspx");
+            Response.Redirect("Society.aspx");
         }
         else
         {
             Label4.Visible = true;
             Label4.ForeColor = System.Drawing.Color.Red;
             Label4.Text = "Invalid User!!!";
+            clearAll();
         }
+
+        
     }
+
+    void clearAll()
+    {
+        //Label4.Visible = false;
+        nametxt.Text = "";
+        passtxt.Text = "";
+    }
+
+   
 }

@@ -26,14 +26,24 @@ public partial class MemberLogin : System.Web.UI.Page
         if (temp == 1)
         {
             Application["UserEmail"] = nametxt.Text;
+            clearAll();
             Response.Redirect("MemberHome.aspx");
         }
         else
         {
+            clearAll();
             Label4.Visible = true;
             Label4.ForeColor = System.Drawing.Color.Red;
             Label4.Text = "Your email or password is invalid";
 
         }
+        
+    }
+
+    void clearAll()
+    {
+        //Label4.Visible = false;
+        nametxt.Text = "";
+        passtxt.Text = "";
     }
 }

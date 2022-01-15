@@ -19,8 +19,9 @@ public partial class HouseReport : System.Web.UI.Page
             string CS = ConfigurationManager.ConnectionStrings["Project"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
-                SqlCommand cmd = new SqlCommand("Select SName from SocietyTable1", con);
                 con.Open();
+                SqlCommand cmd = new SqlCommand("Select SName from SocietyTable1", con);
+                
                 SqlDataReader rdr = cmd.ExecuteReader();
                 housereportDropDownList.DataTextField = "SName";
                 housereportDropDownList.DataValueField = "SName";

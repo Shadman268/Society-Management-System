@@ -12,6 +12,7 @@ public partial class SendMessage : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        Label12.Visible = false;
         String owner_name = Application["owner"].ToString();
         //Response.Write(owner_name);
         con.Open();
@@ -47,11 +48,27 @@ public partial class SendMessage : System.Web.UI.Page
 
     protected void MsgBtn_Click(object sender, EventArgs e)
     {
-        string selected = Application["owner"].ToString(); ;
-        con.Open();
-        SqlCommand com = new SqlCommand("Insert into MsgTable(Sender,Owner,Message) values('" + SenderTextBox.Text + "','" + selected + "','" + MsgTextBox.Text + "')", con);
-        com.ExecuteNonQuery();
-        con.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Message Sent Successfully')", true);
+        if(SenderTextBox.Text=="" || MsgTextBox.Text=="")
+        {
+            Label12.Visible = true;
+
+            Label12.Text = "Give all the Info!";
+        }
+        else
+        {
+            string selected = Application["owner"].ToString(); ;
+            con.Open();
+            SqlCommand com = new SqlCommand("Insert into MsgTable(Sender,Owner,Message) values('" + SenderTextBox.Text + "','" + selected + "','" + MsgTextBox.Text + "')", con);
+            com.ExecuteNonQuery();
+            con.Close();
+            clearAll();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Message Sent Successfully')", true);
+        }
+        
+    }
+    void clearAll()
+    {
+        SenderTextBox.Text = "";
+        MsgTextBox.Text = ""; 
     }
 }

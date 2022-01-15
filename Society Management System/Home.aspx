@@ -5,66 +5,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <style>
-        .dropbtn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            font-size: 10px;
-            border: none;
-            display: inline-block;
-        }
-
-        .dropdown {
-            
-        }
-
-        .dropdown-content {
-            display: none;
-            background-color: #f1f1f1;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-            .dropdown-content a {
-                color: black;
-                padding: 12px 16px;
-                text-decoration: none;
-                display: block;
-            }
-
-                .dropdown-content a:hover {
-                    background-color: #ddd;
-                }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown:hover .dropbtn {
-            background-color: #3e8e41;
-        }
-    </style>
+    <link href="styleHome.css" rel="stylesheet" type="text/css" />
 
 
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <asp:Button ID="MemberBtn" runat="server" Text="Member" OnClick="MemberBtn_Click" />
+        <input type="checkbox" id="active" />
+        <label for="active" class="menu-btn"><span></span></label>
+        <label for="active" class="close"></label>
+        <div class="wrapper">
+            <ul>
+                <li><a href="AdminLogin.aspx">Admin</a></li>
+                <li><a href="MemberLogin.aspx">Member</a></li>
+                <li><a href="Visitor.aspx">Visitor</a></li>
+                <li><a href="Help.aspx">Help</a></li>
+                
+            </ul>
+        </div>
+        <div class="content">
+            <div class="title">
+                Welcome To E-Housing System
+            </div>
+            <p>
+                
+            </p>
+        </div>
+        <!--
+        <asp:Button ID="MemberBtn" runat="server" Text="Member" OnClick="MemberBtn_Click" />
 &nbsp;&nbsp;&nbsp;
             <asp:Button ID="adminBtn" runat="server" OnClick="adminBtn_Click" Text="Admin" />
 &nbsp;&nbsp;&nbsp;
-            <asp:LinkButton ID="SocietyBtn" Css-class="dropdown-content" runat="server" Text="Society List" OnClick="SocietyBtn_Click" />
-            
-            <button class="dropbtn">Dropdow</button>
-            <div class="dropdown-content">
-                <a href="#">username</a>
-                <a href="#">Login Out</a>
+            <asp:Button ID="SocietyBtn"  runat="server" Text="Society List" OnClick="SocietyBtn_Click" />
+       -->
 
-            </div>
-        </div>
+
     </form>
 </body>
 </html>

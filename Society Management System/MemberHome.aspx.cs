@@ -16,6 +16,7 @@ public partial class MemberHome : System.Web.UI.Page
         con.Open();
         RentPriceLabel.Visible = false;
         Label9.Visible = false;
+        Label10.Visible = false;
         RentPriceTextBox.Visible = false;
         RentButton.Visible = false;
         SellButton.Visible = false;
@@ -25,11 +26,13 @@ public partial class MemberHome : System.Web.UI.Page
         string Name;
 
         Name = Application["UserEmail"].ToString();
+        
         String query = "select FName from MemberTable where Email='" + Name + "'";
         SqlCommand com = new SqlCommand(query, con);
         SqlDataReader reader = com.ExecuteReader();
         reader.Read();
         Owner = reader["FName"].ToString();
+        Label11.Text = Owner;
         //Response.Write(Owner);
         reader.Close();
 

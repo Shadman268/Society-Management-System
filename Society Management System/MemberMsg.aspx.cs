@@ -15,7 +15,8 @@ public partial class MemberMsg : System.Web.UI.Page
         con.Open();
         Label1.Visible = false;
         string str,Owner;
-        str = Application["UserEmail"].ToString();
+        //if(Application["UserEmail"].ToString()!=null)
+            str = Application["UserEmail"].ToString();
         //Response.Write(str);
 
         String query = "select FName from MemberTable where Email='" + str + "'";

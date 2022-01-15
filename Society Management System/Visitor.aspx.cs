@@ -15,18 +15,12 @@ public partial class Visitor : System.Web.UI.Page
 
     }
 
-    protected void SellBtn_Click(object sender, EventArgs e)
-    {
-        SqlCommand com = new SqlCommand("select * from SellTable", con);
-        SqlDataAdapter d = new SqlDataAdapter(com);
-        System.Data.DataTable Dt = new System.Data.DataTable();
-        d.Fill(Dt);
-        SellGridView.DataSource = Dt;
-        SellGridView.DataBind();
-    }
+    
 
     protected void RentBtn_Click(object sender, EventArgs e)
     {
+        SellGridView.Visible = false;
+        RentGridView.Visible = true;
         SqlCommand com = new SqlCommand("select * from RentTable", con);
         SqlDataAdapter d = new SqlDataAdapter(com);
         System.Data.DataTable Dt = new System.Data.DataTable();
@@ -55,5 +49,39 @@ public partial class Visitor : System.Web.UI.Page
         }
         Response.Redirect("SendMessage.aspx");
 
+    }
+
+    protected void SellGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "Click1")
+        {
+            //Determine the RowIndex of the Row whose Button was clicked.
+            int rowIndex = Convert.ToInt32(e.CommandArgument);
+
+            //Reference the GridView Row.
+            GridViewRow row = SellGridView.Rows[rowIndex];
+
+            //Fetch value of Name.
+            //string name = (row.FindControl("txtName") as TextBox).Text;
+
+            //Fetch value of Owner
+            string Owner = row.Cells[1].Text;
+            Application["owner"] = Owner;
+            System.Diagnostics.Debug.WriteLine(Owner);
+        }
+        Response.Redirect("SendMessage.aspx");
+
+    }
+
+    protected void SellBtn_Click1(object sender, EventArgs e)
+    {
+        RentGridView.Visible = false;
+        SellGridView.Visible = true;
+        SqlCommand com = new SqlCommand("select * from SellTable", con);
+        SqlDataAdapter d = new SqlDataAdapter(com);
+        System.Data.DataTable Dt = new System.Data.DataTable();
+        d.Fill(Dt);
+        SellGridView.DataSource = Dt;
+        SellGridView.DataBind();
     }
 }

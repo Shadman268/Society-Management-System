@@ -39,20 +39,30 @@ public partial class AllocateToMember : System.Web.UI.Page
 
 
     protected void addmemberBtn_Click(object sender, EventArgs e)
-    {
-        string conn = "Data Source=SADDU-S;Initial Catalog=Project;Integrated Security=True";
-        SqlConnection sqlcon = new SqlConnection(conn);
-        FileUpload1.SaveAs(Server.MapPath("~/pic/") + Path.GetFileName(FileUpload1.FileName));
-        String link = "pic/" + Path.GetFileName(FileUpload1.FileName);
+    {       
+        if (FileUpload1.FileName=="" ||TextBox1.Text == "" || TextBox2.Text == "" || TextBox3.Text == "" || TextBox4.Text == "" || TextBox5.Text == "" || TextBox6.Text == "")
+        {
+            Label9.Visible = true;
+            Label9.ForeColor = System.Drawing.Color.Red;
+            Label9.Text = "Give All Information!";
+        }
+        else
+        {
+            string conn = "Data Source=SADDU-S;Initial Catalog=Project;Integrated Security=True";
+            SqlConnection sqlcon = new SqlConnection(conn);
+            FileUpload1.SaveAs(Server.MapPath("~/pic/") + Path.GetFileName(FileUpload1.FileName));
+            String link = "pic/" + Path.GetFileName(FileUpload1.FileName);
+            String query = "Insert into MemberTable(FName,LName,Email,Mobile,SName,HNo,Photo,UName,Pass)values ('" + TextBox1.Text + "','" + TextBox2.Text + "','" + TextBox3.Text + "','" + TextBox4.Text + "','" + memberSocietyNameDropDownList.SelectedItem.Text + "','" + memberHouseNoDropDownList.SelectedItem.Text + "','" + link + "','" + TextBox5.Text + "','" + TextBox6.Text + "')";
 
-        String query = "Insert into MemberTable(FName,LName,Email,Mobile,SName,HNo,Photo,UName,Pass)values ('" + TextBox1.Text + "','" + TextBox2.Text + "','" + TextBox3.Text + "','" + TextBox4.Text + "','"+memberSocietyNameDropDownList.SelectedItem.Text+"','"+memberHouseNoDropDownList.SelectedItem.Text+"','" + link + "','"+TextBox5.Text+"','"+TextBox6.Text+"')";
+            SqlCommand cmd = new SqlCommand(query, sqlcon);
+            sqlcon.Open();
+            cmd.ExecuteNonQuery();
+            sqlcon.Close();
+            Label9.Visible = true;
+            Label9.Text = "Member Added Successfully";
+            clearAll();
+        }
         
-        SqlCommand cmd = new SqlCommand(query, sqlcon);
-        sqlcon.Open();
-        cmd.ExecuteNonQuery();
-        sqlcon.Close();
-        Label9.Visible = true;
-        Label9.Text = "Member Added Successfully";
 
     }
 
@@ -96,5 +106,14 @@ public partial class AllocateToMember : System.Web.UI.Page
             Label10.Visible = false;
         }
         
+    }
+    void clearAll()
+    {
+        TextBox1.Text = "";
+        TextBox2.Text = "";
+        TextBox3.Text = "";
+        TextBox4.Text = "";
+        TextBox5.Text = "";
+        TextBox6.Text = "";
     }
 }

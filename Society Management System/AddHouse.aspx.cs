@@ -16,7 +16,9 @@ public partial class AddHouse : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            
+            tothouse.Visible = false;
+            Label8.Visible = false;
+            Label7.Visible = false;
             string CS = ConfigurationManager.ConnectionStrings["Project"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
@@ -30,10 +32,6 @@ public partial class AddHouse : System.Web.UI.Page
 
                 societyDropDownList.Items.Insert(0, "<-- Select -->");
                 con.Close();
-
-                
-
-                //cmd = new SqlCommand("Select NoOfHouses from SocietyTable1 where ", con);
             }
 
         }
@@ -43,10 +41,21 @@ public partial class AddHouse : System.Web.UI.Page
     {
         string selected = societyDropDownList.SelectedItem.Text;
         con.Open();
-        SqlCommand com = new SqlCommand("Insert into HouseTable1(SName,HouseNo,Size,Type,Details) values('" + societyDropDownList.SelectedItem.Text + "','" + housenotxt.Text + "','" + sizetxt.Text + "','"+typetxt.Text+"','"+detailstxt.Text+"')", con);
-        com.ExecuteNonQuery();
-        con.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
+        if (sizetxt.Text == "" || housenotxt.Text=="" || typetxt.Text=="" || detailstxt.Text=="")
+        {
+            Label7.Visible = true;
+            Label7.ForeColor = System.Drawing.Color.Red;
+            Label7.Text = "Give All Information!";
+        }
+        else
+        {
+            SqlCommand com = new SqlCommand("Insert into HouseTable1(SName,HouseNo,Size,Type,Details) values('" + societyDropDownList.SelectedItem.Text + "','" + housenotxt.Text + "','" + sizetxt.Text + "','" + typetxt.Text + "','" + detailstxt.Text + "')", con);
+            com.ExecuteNonQuery();
+            con.Close();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Inserted Successfully')", true);
+            clearAll();
+        }
+        
     }
 
     protected void societyDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -64,6 +73,32 @@ public partial class AddHouse : System.Web.UI.Page
         reader.Read();
         tothouse.Text = reader["NoOfHouses"].ToString();
         reader.Close();
+
+        cmd = new SqlCommand("Select SName from HouseTable1 where SName ='" + selected + "'", con);
+        SqlDataReader reader1 = cmd.ExecuteReader();
+        
+        int count = 0;
+        if (reader1.HasRows)
+        {
+            
+            while(reader1.Read())
+            {
+                count++;
+                
+            }
+
+        }
+        tothouse.Visible = true;
+        Label8.Visible = true;
+        Label8.Text = count.ToString();
+        reader1.Close();
         con.Close();
+    }
+    void clearAll()
+    {
+        housenotxt.Text = "";
+        sizetxt.Text = "";
+        typetxt.Text = "";
+        detailstxt.Text = "";
     }
 }
